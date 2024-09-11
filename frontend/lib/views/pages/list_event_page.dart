@@ -66,7 +66,6 @@ class _ListEventPageState extends State<ListEventPage> with SingleTickerProvider
             return const Center(child: CircularProgressIndicator());
           } else if (viewModel.eventList!.isEmpty) {
 
-            print(viewModel.eventList!.length);
             return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -79,7 +78,6 @@ class _ListEventPageState extends State<ListEventPage> with SingleTickerProvider
                       onPressed: (){
                         viewModel.selectedEventType=null;
                         viewModel.selectedDate=null;
-                        viewModel.filterList =[];
                         viewModel.filterActive=false;
                       },
                       style: ElevatedButton.styleFrom(
@@ -106,7 +104,6 @@ class _ListEventPageState extends State<ListEventPage> with SingleTickerProvider
                       onPressed: (){
                         viewModel.selectedEventType=null;
                         viewModel.selectedDate=null;
-                        viewModel.filterList =[];
                         viewModel.filterActive=false;
                       },
                       style: ElevatedButton.styleFrom(
@@ -168,7 +165,7 @@ class _ListEventPageState extends State<ListEventPage> with SingleTickerProvider
           DropdownButton<String>(
             value: viewModel.selectedEventType,
             elevation: 16,
-            hint: CustomText("Select Date"),
+            hint: CustomText("Select Event Type"),
             onChanged: (String? value) {
               viewModel.selectedEventType = value;
 

@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBxppW145iUoRPtl_EeWzN0HFeKt_4Uvho',
-    appId: '1:296197298155:android:3d01c778e7d51650082bae',
-    messagingSenderId: '296197298155',
-    projectId: 'event-management-4cb70',
-    storageBucket: 'event-management-4cb70.appspot.com',
+    apiKey: 'AIzaSyALhFzx785NqOl9vGnZceqw6p0WooJNmeI',
+    appId: '1:8056387354:android:36b311d528cdfd69c69ea3',
+    messagingSenderId: '8056387354',
+    projectId: 'event-management-ea467',
+    storageBucket: 'event-management-ea467.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC0dJzprsFLanj2k1tasfDYDdlRNFde9VQ',
-    appId: '1:296197298155:ios:d64b4bc131ca3355082bae',
-    messagingSenderId: '296197298155',
-    projectId: 'event-management-4cb70',
-    storageBucket: 'event-management-4cb70.appspot.com',
+    apiKey: 'AIzaSyBv_JKU9Prb2V9Byw5__IbRIY5ljjtVzLw',
+    appId: '1:8056387354:ios:086dcc9f27a72d38c69ea3',
+    messagingSenderId: '8056387354',
+    projectId: 'event-management-ea467',
+    storageBucket: 'event-management-ea467.appspot.com',
     iosBundleId: 'com.ertugrulsahin.eventmanagement.frontend',
   );
 }

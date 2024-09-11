@@ -1,13 +1,14 @@
 // firebase.js
 const admin = require('firebase-admin');
-const serviceAccount = require('./event-management-4cb70-4639599109a6.json'); // Go up one directory
+const serviceAccount = require('./event-management-ea467-firebase-adminsdk-4rewt-8e89add026.json'); // Go up one directory
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'event-management-4cb70.appspot.com',
+  storageBucket: 'event-management-ea467.appspot.com',
 });
 
 const db = admin.firestore();
 const bucket = admin.storage().bucket();
+
 
 module.exports = { admin, db,bucket };

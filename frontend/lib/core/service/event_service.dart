@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 class EventService implements EventBase{
   final FirebaseFirestore _firebaseDB = FirebaseFirestore.instance;
   final dio=Dio();
-  final String baseUrl="https://us-central1-event-management-4cb70.cloudfunctions.net/api";
+  final String baseUrl="https://us-central1-event-management-ea467.cloudfunctions.net/api";
   @override
   Stream<List<Event>>  getAllEvents() {
     return _firebaseDB.collection('events').snapshots().map((snapshot) {

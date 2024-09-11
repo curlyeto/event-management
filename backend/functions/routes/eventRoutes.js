@@ -1,6 +1,4 @@
 const express = require('express');
-const { bucket } = require('../firebase'); // Import from firebase.js
-const { Readable } = require('stream');
 
 const { createEvent, getAllEvents, getEventById,deleteEventById,updateEvent,uploadImageAndUpdateEvent } = require('../controller/eventController');
 const router = express.Router();
@@ -28,33 +26,5 @@ router.delete('/events/:id', deleteEventById);
 
 
 
-// router.post('/upload', (req, res) => {
-    
-
-//     const file = req.files[0];
-//     console.log(file); // you can see the file fields here, lots of good info from the parser
-
-//     // convert the file buffer to a filestream
-//     const fileStream = Readable.from(file.buffer);
-    
-//     // upload to firebase storage
-//     const fileUpload = bucket.file("/test/"+file.originalname);
-
-//     // create writestream with the contentType of the incoming file
-//     const writeStream = fileUpload.createWriteStream({
-//         metadata: {
-//             contentType: file.mimetype
-//         }
-//     });
-    
-//     // pipe the filestream to be written to storage
-//     fileStream.pipe(writeStream) 
-//       .on('error', (error) => {
-//         console.error('Error:', error);
-//       })
-//       .on('finish', () => {
-//           console.log('File upload complete');
-//       });
-// });
 
 module.exports = router;

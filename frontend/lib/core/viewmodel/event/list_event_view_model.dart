@@ -38,7 +38,7 @@ class ListEventViewModel extends ChangeNotifier{
 
   ListEventViewModel() {
     _eventService.getAllEvents().listen((list) {
-      eventList = list;
+      _eventList = list;
       _eventTypes = _eventList!.map((e) => e.eventType!).toSet().toList();
       _eventTypes!.add("All");
       applyFilter();
@@ -81,37 +81,29 @@ class ListEventViewModel extends ChangeNotifier{
     _submitProcess = value;
     notifyListeners();
   }
-  set filterList(List<Event>? value) {
-    _filterList = value;
-    notifyListeners();
-  }
-  set eventList(List<Event>? value) {
-    _eventList = value;
-    notifyListeners();
-  }
 
 
   void applyFilter() {
-    filterList = eventList; // Start with all events
+    _filterList = _eventList; // Start with all events
 
     // Apply type filter
-    if (selectedEventType != null && selectedEventType != 'All') {
-      filterList = filterList!.where((event) => event.eventType == selectedEventType).toList();
+    if (_selectedEventType != null && _selectedEventType != 'All') {
+      _filterList = _filterList!.where((event) => event.eventType == _selectedEventType).toList();
     }
 
     // Apply date filter
-    if (selectedDate != null) {
+    if (_selectedDate != null) {
 
-      filterList = filterList!.where((event) =>
-      DateTime.parse(event.date!).year == selectedDate!.year &&
-          DateTime.parse(event.date!).month == selectedDate!.month &&
-          DateTime.parse(event.date!).day == selectedDate!.day).toList();
+      _filterList = _filterList!.where((event) =>
+      DateTime.parse(event.date!).year == _selectedDate!.year &&
+          DateTime.parse(event.date!).month == _selectedDate!.month &&
+          DateTime.parse(event.date!).day == _selectedDate!.day).toList();
 
     }
     if(_selectedEventType == 'All'){
-      filterList=eventList;
-      filterActive= !filterActive!;
-      selectedDate=null;
+      _filterList=_eventList;
+      _filterActive= ! _filterActive!;
+      _selectedDate=null;
     }
 
     notifyListeners();

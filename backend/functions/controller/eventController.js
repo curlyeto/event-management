@@ -8,9 +8,11 @@ const logger = require("firebase-functions/logger");
 
 // Upload storage and update firesotre document
 const uploadImageAndUpdateEvent = async (req, res) => {
+   
+    
   if (!req.files || req.files.length === 0) {
-      await Event.delete(req.body.eventId);
-      return res.status(400).json({ message: 'No file uploaded.', eventId: req.body.eventId });
+      await Event.delete(req.body.eventId.toString());
+      return res.status(400).json({ message: 'No file uploaded.', eventId: req.body.eventId.toString()});
   }
 
     const file = req.files[0];
@@ -18,7 +20,7 @@ const uploadImageAndUpdateEvent = async (req, res) => {
     const fileSizeMB = buffer.length / (1024 * 1024); 
 
     if (fileSizeMB > 5) {
-        return res.status(400).json({ message: 'File size exceeds 5MB limit.', eventId: req.body.eventId });
+        return res.status(400).json({ message: 'File size exceeds 5MB limit.', eventId: req.body.eventId.toString()});
     }
 
   const filePath = `events/${file.originalname}`; 
@@ -45,15 +47,15 @@ const uploadImageAndUpdateEvent = async (req, res) => {
       }
 
       // Update the event document with the image URL
-      await db.collection('events').doc(req.body.eventId).update({
+      await db.collection('events').doc(req.body.eventId.toString()).update({
           imageUrl: publicUrl
       });
 
-      res.status(200).json({ message: 'Event updated successfully', imageUrl: publicUrl, eventId: req.body.eventId });
+      res.status(200).json({ message: 'Event updated successfully', imageUrl: publicUrl, eventId: req.body.eventId.toString() });
   } catch (error) {
-      await Event.delete(req.body.eventId);
+      await Event.delete(req.body.eventId.toString());
       console.error('Error checking file existence and updating event:', error);
-      res.status(500).json({ error: 'Failed to check file or update event', eventId: req.body.eventId });
+      res.status(500).json({ error: 'Failed to check file or update event', eventId: req.body.eventId.toString() });
   }
 };
 const createEvent = async (req, res) => {

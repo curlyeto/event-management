@@ -28,12 +28,8 @@ class BaseModel {
     }
   
     async update(id, data) {
-      const timestamp = new Date().toISOString();
-      await this.collection.doc(id).set({
-        ...data,
-        updatedAt: timestamp
-      }, { merge: true });
-      return { id, ...data, updatedAt: timestamp };
+      await this.collection.doc(id).set(data, { merge: true });
+      return { id, ...data };
     }
   
     async delete(id) {

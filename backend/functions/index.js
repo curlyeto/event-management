@@ -17,6 +17,7 @@ const functions = require('firebase-functions');
 const express = require('express');
 const cors = require('cors');
 const eventRoutes = require('./routes/eventRoutes');
+const {db} = require('./firebase');
 
 const app = express();
 
@@ -28,6 +29,33 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Use the routes
 app.use('/', eventRoutes);
 
+exports.triggerOnUpdate = functions.firestore
+    .document('events/{events}')
+    .onUpdate((change, context) => {
+     // Get an object representing the current and previous state of the document
+     const newValue = change.after.data();
+     const oldValue = change.before.data();
+
+     // Check if updatedAt already up-to-date
+     const newUpdatedAt = new Date(newValue.updatedAt).getTime();
+     const now = new Date().getTime();
+
+
+     if (newUpdatedAt && (now - newUpdatedAt < 1000)) { 
+         console.log('Skip updating to avoid loop');
+         return null;
+     }
+
+     const timestamp = new Date().toISOString();
+
+     // Update the updatedAt field in the document
+     return change.after.ref.update({
+         updatedAt: timestamp
+     })
+     .then(() => console.log('Updated the updatedAt field'))
+     .catch(error => console.error('Error updating document:', error));
+        
+});
 
 exports.api = functions.https.onRequest(app);
 
@@ -40,4 +68,3 @@ exports.api = functions.https.onRequest(app);
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
-

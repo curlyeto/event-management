@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:frontend/core/viewmodel/event/create_event_view_model.dart';
 import 'package:frontend/core/viewmodel/event/detail_event_view_model.dart';
 import 'package:frontend/core/viewmodel/event/edit_event_view_model.dart';
@@ -11,6 +12,11 @@ import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  //setting up orientation of device
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -25,6 +31,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ListEventViewModel>(create: (_) => ListEventViewModel()),

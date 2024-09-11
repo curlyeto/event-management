@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "event-management-4cb70"
-  }
+    "default": "event-management-4cb70",
+    "manage-event": "event-management-ea467"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }
